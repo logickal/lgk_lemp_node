@@ -4,6 +4,9 @@ node default {
     always_apt_update => true,
   }
 
+  class {'git':
+  }
+
   class { 'nginx':
   }
 
