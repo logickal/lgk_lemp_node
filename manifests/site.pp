@@ -46,7 +46,7 @@ class { 'nginxphp::ppa': stage => 'pre' }
       php_devmode => true,
       fpm_user => 'vagrant',
       fpm_group => 'vagrant',
-      
+
   }
 
   nginxphp::nginx_addphpconfig { 'drupal.local':
