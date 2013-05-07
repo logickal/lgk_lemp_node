@@ -17,3 +17,9 @@
 [submodule "modules/nginx"]
 	path = modules/nginx
 	url = git://github.com/jfryman/puppet-nginx.git
+[submodule "webroot"]
+	path = webroot
+	url = ssh://projects@ideadevel.com/home/projects/repos/fantorrent_dev
+[submodule "modules/nginxphp"]
+	path = modules/nginxphp
+	url = git://github.com/hfraser/puppet-nginx-php.git
