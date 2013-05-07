@@ -29,6 +29,11 @@ node default {
       host => 'localhost',
       grant => ['all'],
   }
-  
+
+  nginx::resource::vhost {
+    'localhost':
+      ensure => present,
+      www_root => '/vagrant/webroot',
+  }
 }
 
