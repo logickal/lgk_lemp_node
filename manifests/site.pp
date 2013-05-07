@@ -3,15 +3,10 @@ node default {
   stage { ['pre', 'post']: }
   
   Stage['pre'] -> Stage['main'] -> Stage['post']
+
+
+class { 'nginxphp::ppa': stage => 'pre' }
   
-  class { 'apt':
-    always_apt_update => true,
-    stage => 'pre'
-  }
-
-  apt::ppa { "ppa:ondrej/php5": }
-  apt::key { "ondrej": key => "E5267A6C" }
-
   class {'git':
   }
 
@@ -31,8 +26,6 @@ node default {
   }
 
   include nginxphp
-
-
   
   class { 'nginxphp::php':
     php_packages => [
@@ -40,14 +33,13 @@ node default {
                      "php5-gd",
                      "php5-xcache",
                      "php5-xmlrpc",
+                     "php5-mysql",
                      ],
-
-
   }
 
   include nginxphp::nginx
 
-  include nginxphp::phpdev
+
 
   nginxphp::fpmconfig {
     'vagrantphp':
@@ -57,11 +49,13 @@ node default {
       
   }
 
-  nginxphp::nginx_addphpconfig { 'localhost':
+  nginxphp::nginx_addphpconfig { 'drupal.local':
     website_root => "/vagrant/webroot",
     default_controller => "index.php",
     require => Nginxphp::Fpmconfig['vagrantphp']
   }
+
+
 }
 
 
