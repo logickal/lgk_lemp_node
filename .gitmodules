@@ -15,4 +15,4 @@
 	url = ssh://projects@ideadevel.com/home/projects/repos/fantorrent_dev
 [submodule "modules/nginxphp"]
 	path = modules/nginxphp
-	url = git://github.com/hfraser/puppet-nginx-php.git
+	url = git://github.com/logickal/puppet-nginx-php.git
