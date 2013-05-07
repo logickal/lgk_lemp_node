@@ -4,19 +4,12 @@
 [submodule "modules/mysql"]
 	path = modules/mysql
 	url = git://github.com/puppetlabs/puppetlabs-mysql.git
-[submodule "modules/php_fastcgi"]
-	path = modules/php_fastcgi
-	url = git://github.com/mimedia/php_fastcgi.git
 [submodule "modules/git"]
 	path = modules/git
 	url = git://github.com/puppetlabs/puppetlabs-git.git
 [submodule "modules/stdlib"]
 	path = modules/stdlib
 	url = git://github.com/puppetlabs/puppetlabs-stdlib.git
-
-[submodule "modules/nginx"]
-	path = modules/nginx
-	url = git://github.com/jfryman/puppet-nginx.git
 [submodule "webroot"]
 	path = webroot
 	url = ssh://projects@ideadevel.com/home/projects/repos/fantorrent_dev
