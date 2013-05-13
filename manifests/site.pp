@@ -55,6 +55,14 @@ class { 'nginxphp::ppa': stage => 'pre' }
     require => Nginxphp::Fpmconfig['vagrantphp']
   }
 
+  include nginxphp::phpdev
+  
+  nginxphp::pear_addchannel { 'pear.drush.org': }
+
+  nginxphp::pear_install {
+    'drush/drush': require =>
+    [Nginxphp::Pearaddchannel['pear.drush.org']]
+  }
 
 }
 
