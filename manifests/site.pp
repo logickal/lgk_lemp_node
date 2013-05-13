@@ -1,12 +1,12 @@
 node default {
 
   stage { ['pre', 'post']: }
-  
+
   Stage['pre'] -> Stage['main'] -> Stage['post']
 
 
-class { 'nginxphp::ppa': stage => 'pre' }
-  
+  class { 'nginxphp::ppa': stage => 'pre' }
+
   class {'git':
   }
 
@@ -55,17 +55,14 @@ class { 'nginxphp::ppa': stage => 'pre' }
     require => Nginxphp::Fpmconfig['vagrantphp']
   }
 
-  include nginxphp::phpdev
-  
-  nginxphp::pear_addchannel { 'pear.drush.org': }
+  nginxphp::pear_addchannel { 'pear.drush.org':
+  require => Package['php-pear']}
 
   nginxphp::pear_install {
-    'drush/drush': require =>
-    [Nginxphp::Pearaddchannel['pear.drush.org']]
+    'drush/drush':
+      require => [Nginxphp::Pear_addchannel['pear.drush.org']],
   }
 
+
+
 }
-
-
-
-
