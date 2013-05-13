@@ -63,6 +63,10 @@ node default {
       require => [Nginxphp::Pear_addchannel['pear.drush.org']],
   }
 
-
+  exec{ "drush-dl-registry-rebuild":
+    command => "/usr/bin/drush dl registry_rebuild",
+    require => [Nginxphp::Pear_install['drush/drush']]
+  }
+  
 
 }
