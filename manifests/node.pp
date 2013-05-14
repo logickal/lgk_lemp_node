@@ -1,23 +1,32 @@
 node default {
 
+  exec {'apt-get update':
+    command => '/usr/bin/apt-get update'
+  }
   class {'git': }
 
-  file { '/usr/local/lib/node_modules':
+  file { '/usr/lib/node_modules':
     ensure => "directory",
-    owner => 'vagrant',
-    group => 'vagrant',
+    owner => 'root',
+    group => 'admin',
+    mode => 775,
     
   }
   
   class { 'nodejs':
+    require => Exec['apt-get update']
   }
     
-#  package { 'supervisor' :
-#    ensure => latest,
-#    provider => 'npm',
-#    require => [Package['nodejs'], File['/usr/local/lib/node_modules']],
-#  }
+  package { 'supervisor' :
+    ensure => present,
+    provider => 'npm',
+    require => Package['nodejs'],
+  }
   
-  
+  package { 'coffee-script' :
+    ensure => present,
+    provider => 'npm',
+    require => Package['nodejs'],
+  }
   
 }
