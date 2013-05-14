@@ -13,10 +13,34 @@ Vagrant.configure("2") do |config|
   # doesn't already exist on the user's system.
    config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
+  config.vm.define :web do |web|
+    web.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true    
+  
+    web.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
+   end
+    
+     web.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "site.pp"
+      puppet.module_path = "modules"
+    end  
+  end
+
+
+  config.vm.define :node do |node|
+    node.vm.network :forwarded_port, guest: 8000, host: 8000, auto_correct: true    
+    node.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "node.pp"
+      puppet.module_path = "modules"
+    end  
+
+  end
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-   config.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+   
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -37,13 +61,7 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-   config.vm.provider :virtualbox do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-     vb.customize ["modifyvm", :id, "--memory", "2048"]
-   end
+
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -66,12 +84,6 @@ Vagrant.configure("2") do |config|
   # #               Managed by Puppet.\n"
   # # }
   #
-   config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "manifests"
-     puppet.manifest_file  = "site.pp"
-     puppet.module_path = "modules"
-   end
-
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
