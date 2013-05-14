@@ -5,8 +5,13 @@ node default {
   Stage['pre'] -> Stage['main'] -> Stage['post']
 
 
+  
   class { 'nginxphp::ppa': stage => 'pre' }
 
+  package { 'nfsd':
+    ensure => present
+  }
+  
   class {'git':
   }
 
