@@ -13,3 +13,6 @@
 [submodule "modules/nginxphp"]
 	path = modules/nginxphp
 	url = ssh://git@github.com/logickal/puppet-nginx-php.git
+[submodule "modules/nodejs"]
+	path = modules/nodejs
+	url = https://github.com/puppetlabs/puppetlabs-nodejs
