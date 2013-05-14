@@ -8,10 +8,6 @@ node default {
   
   class { 'nginxphp::ppa': stage => 'pre' }
 
-  package { 'nfsd':
-    ensure => present
-  }
-  
   class {'git':
   }
 
